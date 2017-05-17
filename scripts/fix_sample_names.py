@@ -14,7 +14,8 @@ def main(sample_dir):
             s = s.strip('_').strip('-').strip('.')
 
             new = s + '.R1.fastq.gz'
-            print(basename(samp), basename(new))
+
+            os.rename(samp, new)
 
         else:
             s = samp.split('_R2_')
@@ -22,7 +23,7 @@ def main(sample_dir):
             s = s.strip('_').strip('-').strip('.')
 
             new = s + '.R2.fastq.gz'
-            print(basename(samp), basename(new))
+            os.rename(samp, new)
 
 
 if __name__ == '__main__':
