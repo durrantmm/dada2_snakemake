@@ -19,7 +19,7 @@ SAMPLES = {batch: glob_wildcards('{fastq_dir}/{batch}/{{sample}}.{{pair}}.fastq.
            for batch in BATCHES}
 PAIRS = ['R1', 'R2']
 
-samps = [expand('{fq_dir}/{batch}/{sample}.{{pair}}.fastq.gz'.format(fq_dir=FASTQ_DIR, batch=batch, sample=sample), pair=PAIRS) for sample in SAMPLES[BATCH] for batch in SAMPLES]
+samps = [expand('{fq_dir}/{batch}/{sample}.{{pair}}.fastq.gz'.format(fq_dir=FASTQ_DIR, batch=batch, sample=sample), pair=PAIRS) for sample in SAMPLES[batch] for batch in SAMPLES]
 print(samps)
 sys.exit()
 
