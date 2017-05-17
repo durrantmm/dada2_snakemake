@@ -12,10 +12,9 @@ SEQTABS_DIR = join(WD, config['seqtables_dir'])
 MERGED_SEQTAB_DIR = join(WD, config['merged_seqtab_dir'])
 TAXONOMY_DIR = join(WD, config['taxonomy_dir'])
 
-print(join(ORIG_FASTQ_DIR, "{batch}"))
-WC = glob_wildcards(join(ORIG_FASTQ_DIR, "{batch}"))
+batches = glob(join(ORIG_FASTQ_DIR, "/*"))
 
-print(WC.batch)
+print(batches)
 
 rule all:
     input:
