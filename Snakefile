@@ -19,13 +19,17 @@ SAMPLES = {batch: glob_wildcards('{fastq_dir}/{batch}/{{sample}}.{{pair}}.fastq.
            for batch in BATCHES}
 PAIRS = ['R1', 'R2']
 
-samps = ['{fq_dir}/{batch}/{sample}.R1.fastq.gz'.format(fq_dir=FASTQ_DIR, batch=batch, sample=sample) for batch, sample in SAMPLES.items()]
-print(samps)
-sys.exit()
+def iter_samples(samples):
+    for batch in SAMPLES:
+        for samp in SAMPLES[batch]:
+            yield (batch, samp)
+
+
+samps = ['{fq_dir}/{batch}/{sample}.R1.fastq.gz'.format(fq_dir=FASTQ_DIR, batch=batch, sample=sample) for batch, sample in iter_samples(SAMPLES)]
 
 rule all:
     input:
-
+        samps
     run:
         print("FINISHED SUCCESSFULLY.")
 
