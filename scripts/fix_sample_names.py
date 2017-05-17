@@ -1,5 +1,5 @@
 import sys, os
-from os.path import join, abspath
+from os.path import join, abspath, basename
 from glob import glob
 
 def main(sample_dir):
@@ -14,14 +14,15 @@ def main(sample_dir):
             s = s.strip('_').strip('-').strip('.')
 
             new = s + '.R1.fastq.gz'
-            print(samp, new)
+            print(basename(samp), basename(new))
+
         else:
             s = samp.split('R2')
             s = s[0]
             s = s.strip('_').strip('-').strip('.')
 
             new = s + '.R2.fastq.gz'
-            print(samp, new)
+            print(basename(samp), basename(new))
 
 
 if __name__ == '__main__':
