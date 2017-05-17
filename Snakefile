@@ -14,7 +14,7 @@ SEQTABS_DIR = join(WD, config['seqtables_dir'])
 MERGED_SEQTAB_DIR = join(WD, config['merged_seqtab_dir'])
 TAXONOMY_DIR = join(WD, config['taxonomy_dir'])
 
-batches = [basename(p) for p in glob(join(ORIG_FASTQ_DIR, "*"))]
+batches = [basename(p) for p in glob(join(FASTQ_DIR, "*"))]
 samples = {glob_wildcards('{fastq_dir}/{batch}/{{sample}}.{{pair}}.fastq.gz'.format(fastq_dir=FASTQ_DIR, batch=batch)).sample
            for batch in batches}
 
