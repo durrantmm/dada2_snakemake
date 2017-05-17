@@ -18,6 +18,8 @@ BATCHES = [basename(p) for p in glob(join(FASTQ_DIR, "*"))]
 SAMPLES = {batch: glob_wildcards('{fastq_dir}/{batch}/{{sample}}.{{pair}}.fastq.gz'.format(fastq_dir=FASTQ_DIR, batch=batch)).sample
            for batch in BATCHES}
 PAIRS = ['R1', 'R2']
+FWD_REV = ['FWD','REV']
+
 
 def iter_samples(samples):
     for batch in SAMPLES:
@@ -25,11 +27,12 @@ def iter_samples(samples):
             yield (batch, samp)
 
 
-samps = ['{fq_dir}/{batch}/{sample}.R1.fastq.gz'.format(fq_dir=FASTQ_DIR, batch=batch, sample=sample) for batch, sample in iter_samples(SAMPLES)]
+samps_fwd = ['{dir}/{batch}/{fr}/{sample}.{pair}.fastq.gz'.format(dir=FILTERED_FASTQ_DIR, fr=FWD_REV[0], batch=batch, pair=PAIRS[0], sample=sample) for batch, sample in iter_samples(SAMPLES)]
+samps_rev = ['{dir}/{batch}/{fr}/{sample}.{pair}.fastq.gz'.format(dir=FILTERED_FASTQ_DIR, fr=FWD_REV[1], batch=batch, pair=PAIRS[1], sample=sample) for batch, sample in iter_samples(SAMPLES)]
 
 rule all:
     input:
-        samps
+        samps_fwd + samps_rev
     run:
         print("FINISHED SUCCESSFULLY.")
 
