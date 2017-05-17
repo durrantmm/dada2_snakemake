@@ -27,12 +27,13 @@ def iter_samples(samples):
             yield (batch, samp)
 
 
-samps_fwd = ['{dir}/{batch}/{fr}/{sample}.{pair}.fastq.gz'.format(dir=FILTERED_FASTQ_DIR, fr=FWD_REV[0], batch=batch, pair=PAIRS[0], sample=sample) for batch, sample in iter_samples(SAMPLES)]
-samps_rev = ['{dir}/{batch}/{fr}/{sample}.{pair}.fastq.gz'.format(dir=FILTERED_FASTQ_DIR, fr=FWD_REV[1], batch=batch, pair=PAIRS[1], sample=sample) for batch, sample in iter_samples(SAMPLES)]
+samps_fwd = list(['{dir}/{batch}/{fr}/{sample}.{pair}.fastq.gz'.format(dir=FILTERED_FASTQ_DIR, fr=FWD_REV[0], batch=batch, pair=PAIRS[0], sample=sample) for batch, sample in iter_samples(SAMPLES)])
+samps_rev = list(['{dir}/{batch}/{fr}/{sample}.{pair}.fastq.gz'.format(dir=FILTERED_FASTQ_DIR, fr=FWD_REV[1], batch=batch, pair=PAIRS[1], sample=sample) for batch, sample in iter_samples(SAMPLES)])
 
 rule all:
     input:
-        samps_fwd + samps_rev
+        samps_fwd,
+        samps_rev
     run:
         print("FINISHED SUCCESSFULLY.")
 
