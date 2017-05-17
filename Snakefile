@@ -18,6 +18,7 @@ batches = [basename(p) for p in glob(join(FASTQ_DIR, "*"))]
 samples = {batch: glob_wildcards('{fastq_dir}/{batch}/{{sample}}.{{pair}}.fastq.gz'.format(fastq_dir=FASTQ_DIR, batch=batch)).sample
            for batch in batches}
 
+
 print(samples)
 
 rule all:
