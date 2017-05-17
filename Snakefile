@@ -5,9 +5,9 @@ from os.path import basename, join
 from glob import glob
 
 WD = config['working_dir']
-print(WD)
-ORIG_FASTQ_DIR = join(WD, config['orig_fastqs'])
-print(ORIG_FASTQ_DIR )
+
+FASTQ_DIR = join(WD, config['orig_fastqs'])
+
 FILTERED_FASTQ_DIR = join(WD, config['filtered_fastqs'])
 ERROR_MODEL_DIR = join(WD, config['error_model_dir'])
 SEQTABS_DIR = join(WD, config['seqtables_dir'])
@@ -15,8 +15,10 @@ MERGED_SEQTAB_DIR = join(WD, config['merged_seqtab_dir'])
 TAXONOMY_DIR = join(WD, config['taxonomy_dir'])
 
 batches = [basename(p) for p in glob(join(ORIG_FASTQ_DIR, "*"))]
+samples = {glob_wildcards('{fastq_dir}/{batch}/{{sample}}.{{pair}}.fastq.gz'.format(fastq_dir=FASTQ_DIR, batch=batch)).sample
+           for batch in batches}
 
-print(batches)
+print(samples)
 
 rule all:
     input:
