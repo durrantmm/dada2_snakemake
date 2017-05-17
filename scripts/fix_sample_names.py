@@ -8,19 +8,19 @@ def main(sample_dir):
         samp = abspath(samp)
 
         s = samp.split('R1')
-        print(s)
+
         if len(samp) > 1:
             s = s[0]
             s = s.strip('_').strip('-').strip('.')
 
-            new = join(s, 'R1.fastq.gz')
+            new = s + '.R1.fastq.gz'
             print(samp, new)
         else:
             s = s[0].split('R2')
             s = s[0]
             s = s.strip('_').strip('-').strip('.')
 
-            new = join(s, 'R2.fastq.gz')
+            new = s + '.R2.fastq.gz'
             print(samp, new)
 
 
