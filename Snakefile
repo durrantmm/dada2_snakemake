@@ -19,8 +19,6 @@ SAMPLES = {batch: glob_wildcards('{fastq_dir}/{batch}/{{sample}}.{{pair}}.fastq.
            for batch in BATCHES}
 PAIRS = ['R1', 'R2']
 
-print(samples)
-
 samps = [expand('{fq_dir}/{batch}/{sample}.{{pair}}.fastq.gz'.format(fq_dir=FASTQ_DIR, batch=batch, sample=sample), pair=PAIRS) for sample in SAMPLES[BATCH] for batch in SAMPLES]
 print(samps)
 sys.exit()
@@ -33,8 +31,8 @@ rule all:
 
 rule filter_and_trim:
     input:
-        r1 = "{fq_dir}/{{batch}}/{{sample}}.{pair}.fastq.gz".format(fq_dir=ORIG_FASTQ_DIR, pair=PAIRS[0]),
-        r2 = "{fq_dir}/{{batch}}/{{sample}}.{pair}.fastq.gz".format(fq_dir=ORIG_FASTQ_DIR, pair=PAIRS[1])
+        r1 = "{fq_dir}/{{batch}}/{{sample}}.{pair}.fastq.gz".format(fq_dir=FASTQ_DIR, pair=PAIRS[0]),
+        r2 = "{fq_dir}/{{batch}}/{{sample}}.{pair}.fastq.gz".format(fq_dir=FASTQ_DIR, pair=PAIRS[1])
     output:
         r1 = "{fq_dir}/{{batch}}/{fwdrev}/{{sample}}.{pair}.fastq.gz".format(fq_dir=FILTERED_FASTQ_DIR, fwdrev=FWD_REV[0], pair=PAIRS[0]),
         r2 = "{fq_dir}/{{batch}}/{fwdrev}/{{sample}}.{pair}.fastq.gz".format(fq_dir=FILTERED_FASTQ_DIR, fwdrev=FWD_REV[1], pair=PAIRS[1])
