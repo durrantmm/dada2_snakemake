@@ -49,16 +49,16 @@ rule filter_and_trim:
 
 rule learn_errors:
     input:
-        expand('{dir}/{batch}/{fr}/{sample}.{pair}.fastq.gz'.format(dir=FILTERED_FASTQ_DIR,
+        expand('{dir}/{batch}/{fr}/{{sample}}.{pair}.fastq.gz'.format(dir=FILTERED_FASTQ_DIR,
                                                                     fr=FWD_REV[0],
                                                                     batch='{batch}',
-                                                                    pair=PAIRS[0],
-                                                                    sample=sample)),
+                                                                    pair=PAIRS[0]),
+                                                                    sample=sample),
         expand('{dir}/{batch}/{fr}/{sample}.{pair}.fastq.gz'.format(dir=FILTERED_FASTQ_DIR,
                                                                     fr=FWD_REV[1],
                                                                     batch='{batch}',
-                                                                    pair=PAIRS[1],
-                                                                    sample=SAMPLES['{batch}']}))
+                                                                    pair=PAIRS[1]),
+                                                                    sample=SAMPLES['{batch}']})
     output:
         '{error_dir}/{{batch}}/errors.RData'.format(error_dir=ERROR_MODEL_DIR)
     shell:
