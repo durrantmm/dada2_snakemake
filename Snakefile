@@ -3,7 +3,6 @@ configfile: "config.yaml"
 import os, sys
 from os.path import basename, join
 from glob import glob
-from  more_itertools import unique_everseen as uniq
 
 WD = config['working_dir']
 ORIG_FASTQ_DIR = join(WD, config['orig_fastqs'])
