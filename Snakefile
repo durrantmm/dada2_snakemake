@@ -14,7 +14,7 @@ SEQTABS_DIR = join(WD, config['seqtables_dir'])
 MERGED_SEQTAB_DIR = join(WD, config['merged_seqtab_dir'])
 TAXONOMY_DIR = join(WD, config['taxonomy_dir'])
 
-batches = glob(join(ORIG_FASTQ_DIR, "*"))
+batches = [basename(p) for p in glob(join(ORIG_FASTQ_DIR, "*"))]
 
 print(batches)
 
