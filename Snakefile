@@ -32,7 +32,9 @@ samps_rev = list(['{dir}/{batch}/{fr}/{sample}.{pair}.fastq.gz'.format(dir=FILTE
 
 rule all:
     input:
-        expand('{error_dir}/{batch}/error_model.R', error_dir=ERROR_MODEL_DIR, batch=BATCHES)
+        #expand('{error_dir}/{batch}/error_model.R', error_dir=ERROR_MODEL_DIR, batch=BATCHES)
+        samps_fwd,
+        samps_rev
     run:
         print("FINISHED SUCCESSFULLY.")
 
@@ -50,9 +52,7 @@ rule filter_and_trim:
 
 rule learn_errors:
     input:
-        glob('{dir}/{{batch}}/{fr}/*.*.fastq.gz'.format(dir=FILTERED_FASTQ_DIR,
-                                                        fr=FWD_REV[0],
-                                                        pair=PAIRS[0]))
+        '{dir}/{{batch}}/{fr}/{{sample}}.{{pair}}.fastq.gz'.format(dir=FILTERED_FASTQ_DIR, fr=FWD_REV[0], pair=PAIRS[0]))
     output:
         '{error_dir}/{{batch}}/errors.RData'.format(error_dir=ERROR_MODEL_DIR)
     shell:
