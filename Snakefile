@@ -5,7 +5,9 @@ from os.path import basename, join
 from glob import glob
 
 WD = config['working_dir']
+print(WD)
 ORIG_FASTQ_DIR = join(WD, config['orig_fastqs'])
+print(ORIG_FASTQ_DIR )
 FILTERED_FASTQ_DIR = join(WD, config['filtered_fastqs'])
 ERROR_MODEL_DIR = join(WD, config['error_model_dir'])
 SEQTABS_DIR = join(WD, config['seqtables_dir'])
