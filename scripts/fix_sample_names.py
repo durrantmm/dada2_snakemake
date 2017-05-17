@@ -16,7 +16,7 @@ def main(sample_dir):
             new = s + '.R1.fastq.gz'
             print(samp, new)
         else:
-            s = s[0].split('R2')
+            s = samp.split('R2')
             s = s[0]
             s = s.strip('_').strip('-').strip('.')
 
