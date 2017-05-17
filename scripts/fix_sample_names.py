@@ -12,12 +12,16 @@ def main(sample_dir):
         if len(samp) > 1:
             s = s[0]
             s = s.strip('_').strip('-').strip('.')
-            print(s, '.fastq.gz')
+
+            new = join(s, 'R1.fastq.gz')
+            print(samp, new)
         else:
             s = s[0].split('R2')
             s = s[0]
             s = s.strip('_').strip('-').strip('.')
-            print(s, '.fastq.gz')
+
+            new = join(s, 'R2.fastq.gz')
+            print(samp, new)
 
 
 if __name__ == '__main__':
