@@ -7,7 +7,7 @@ def main(sample_dir):
     for samp in samples:
         samp = abspath(samp)
 
-        s = samp.split('R1')
+        s = samp.split('_R1_')
 
         if len(samp) > 1:
             s = s[0]
@@ -17,7 +17,7 @@ def main(sample_dir):
             print(basename(samp), basename(new))
 
         else:
-            s = samp.split('R2')
+            s = samp.split('_R2_')
             s = s[0]
             s = s.strip('_').strip('-').strip('.')
 
