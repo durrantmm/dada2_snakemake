@@ -1,0 +1,18 @@
+working_dir: /Users/mdurrant/OneDrive/Stanford/SnyderLab/sophia/output_dada2
+
+orig_fastqs: 0.fastq
+filtered_fastqs: 1.filtered_fastq
+error_model_dir: 2.error_model
+seqtables_dir: 3.sequence_tables
+taxonomy_dir: 4.assigned_taxonomies
+merged_seqtab_dir: 4.merged_sequence_table
+merged_seqtab_dir: 5.merged_taxonomies
+
+
+rdp_train_set: data/rdp_train_set_14.fa.gz
+rdp_species_train_set: data/rdp_species_assignment_14.fa.gz
+silva_train_set: data/silva_nr_v123_train_set.fa.gz
+silva_species_train_set: data/silva_species_assignment_v123.fa.gz
+
+error_model_train_size: 10
+
