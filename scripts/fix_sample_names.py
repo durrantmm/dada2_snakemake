@@ -1,11 +1,14 @@
 import sys, os
-from os.path import join
+from os.path import join, abspath
 from glob import glob
 
 def main(sample_dir):
     samples = glob(join(sample_dir, '*'))
     for samp in samples:
+        samp = abspath(samp)
+
         s = samp.split('R1')
+        print(s)
         if len(samp) > 1:
             s = s[0]
             s = s.strip('_').strip('-').strip('.')
