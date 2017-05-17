@@ -32,10 +32,10 @@ samps_rev = list(['{dir}/{batch}/{fr}/{sample}.{pair}.fastq.gz'.format(dir=FILTE
 
 rule all:
     input:
-        samps_fwd,
-        samps_rev
+        expand('{error_dir}/{batch}/error_model.R', error_dir=ERROR_MODEL_DIR, batch=BATCHES)
     run:
         print("FINISHED SUCCESSFULLY.")
+
 
 rule filter_and_trim:
     input:
