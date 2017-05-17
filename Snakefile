@@ -19,7 +19,6 @@ print(WC.batch)
 print(WC.sample)
 print(WC.pair)
 
-
 rule all:
     input:
         "hello"
