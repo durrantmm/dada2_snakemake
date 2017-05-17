@@ -1,10 +1,11 @@
-import sys
+import sys, os
 from os.path import join
 from glob import glob
 
 def main(sample_dir):
     samples = glob(join(sample_dir, '*'))
-    print(samples)
+    for samp in samples:
+        print(samp)
 
 
 if __name__ == '__main__':
