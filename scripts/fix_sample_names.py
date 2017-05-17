@@ -5,7 +5,12 @@ from glob import glob
 def main(sample_dir):
     samples = glob(join(sample_dir, '*'))
     for samp in samples:
-        print(samp)
+        samp = samp.split('R1')
+        if len(samp) > 1:
+            print(samp[0], '.fastq.gz')
+        else:
+            samp = samp[0].split('R2')
+            print(samp[0], '.fastq.gz')
 
 
 if __name__ == '__main__':
