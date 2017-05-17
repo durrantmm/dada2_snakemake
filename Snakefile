@@ -45,3 +45,21 @@ rule filter_and_trim:
         r2 = "{fq_dir}/{{batch}}/{fwdrev}/{{sample}}.{pair}.fastq.gz".format(fq_dir=FILTERED_FASTQ_DIR, fwdrev=FWD_REV[1], pair=PAIRS[1])
     shell:
         "Rscript scripts/filter_and_trim.R {input} {output}"
+
+
+rule learn_errors:
+    input:
+        expand('{dir}/{batch}/{fr}/{sample}.{pair}.fastq.gz'.format(dir=FILTERED_FASTQ_DIR,
+                                                                    fr=FWD_REV[0],
+                                                                    batch='{batch}',
+                                                                    pair=PAIRS[0],
+                                                                    sample=sample),
+        expand('{dir}/{batch}/{fr}/{sample}.{pair}.fastq.gz'.format(dir=FILTERED_FASTQ_DIR,
+                                                                    fr=FWD_REV[1],
+                                                                    batch='{batch}',
+                                                                    pair=PAIRS[1],
+                                                                    sample=SAMPLES['{batch}']})
+    output:
+        '{error_dir}/{{batch}}/errors.RData'.format(error_dir=ERROR_MODEL_DIR)
+    shell:
+        'Rscript scripts/error_model.R {output} {input}'

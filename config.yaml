@@ -2,7 +2,7 @@ working_dir: /Users/mdurrant/OneDrive/Stanford/SnyderLab/sophia/output_dada2
 
 orig_fastqs: 0.fastq
 filtered_fastqs: 1.filtered_fastq
-error_model_dir: 2.error_model
+error_model_dir: 2.error_models
 seqtables_dir: 3.sequence_tables
 taxonomy_dir: 4.assigned_taxonomies
 merged_seqtab_dir: 4.merged_sequence_table
