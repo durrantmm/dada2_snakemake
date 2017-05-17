@@ -49,16 +49,9 @@ rule filter_and_trim:
 
 rule learn_errors:
     input:
-        expand('{dir}/{batch}/{fr}/{{sample}}.{pair}.fastq.gz'.format(dir=FILTERED_FASTQ_DIR,
-                                                                    fr=FWD_REV[0],
-                                                                    batch='{batch}',
-                                                                    pair=PAIRS[0]),
-                                                                    sample=SAMPLES['{batch}']),
-        expand('{dir}/{batch}/{fr}/{sample}.{pair}.fastq.gz'.format(dir=FILTERED_FASTQ_DIR,
-                                                                    fr=FWD_REV[1],
-                                                                    batch='{batch}',
-                                                                    pair=PAIRS[1]),
-                                                                    sample=SAMPLES['{batch}'])
+        glob('{dir}/{{batch}}/{fr}/*.*.fastq.gz'.format(dir=FILTERED_FASTQ_DIR,
+                                                        fr=FWD_REV[0],
+                                                        pair=PAIRS[0]))
     output:
         '{error_dir}/{{batch}}/errors.RData'.format(error_dir=ERROR_MODEL_DIR)
     shell:
