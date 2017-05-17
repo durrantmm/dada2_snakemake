@@ -9,7 +9,7 @@ def main(sample_dir):
 
         s = samp.split('_R1_')
 
-        if len(samp) > 1:
+        if len(s) > 1:
             s = s[0]
             s = s.strip('_').strip('-').strip('.')
 
