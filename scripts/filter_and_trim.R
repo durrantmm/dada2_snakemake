@@ -4,17 +4,15 @@ args = commandArgs(trailingOnly=TRUE)
 
 FWD.fastq <- args[1]
 REV.fastq <- args[2]
-filtered_path <- args[3]
-filtered_path.fwd <- file.path(filtered_path, "FWD")
-filtered_path.rev <- file.path(filtered_path, "REV")
+FWD.filtered_path <- args[3]
+REV.filtered_path <- args[4]
 
-dir.create(filtered_path)
-dir.create(filtered_path.fwd)
-dir.create(filtered_path.rev)
+dir.create(dirname(FWD.filtered_path), recursive=T)
+dir.create(dirname(REV.filtered_path), recursive=T)
 
 print(paste("Filtering fastq files", FWD.fastq, "and", REV.fastq))
-filterAndTrim(fwd=FWD.fastq, filt=file.path(filtered_path.fwd, basename(FWD.fastq)),
-              rev=REV.fastq, filt.rev=file.path(filtered_path.rev, basename(REV.fastq)),
+filterAndTrim(fwd=FWD.fastq, filt=FWD.filtered_path,
+              rev=REV.fastq, filt.rev=REV.filtered_path,
               trimLeft=10,
               truncLen=c(295,275), 
               maxEE=c(2, 6), 
