@@ -1,0 +1,21 @@
+{
+    "__default__" :
+    {
+        "account" : "my account",
+        "time" : "00:15:00",
+        "n" : 1,
+        "partition" : "core",
+        "mem": "1G"
+    },
+
+    "filter_and_trim" :
+    {
+        "mem" : "10G"
+    },
+
+    "learn_errors" :
+    {
+        "mem" : "25G",
+        "time" : "24:00:00"
+    }
+}
