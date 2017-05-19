@@ -24,8 +24,7 @@ samps_rev = expand('{dir}/{fr}/{{sample}}.{pair}.fastq.gz'.format(dir=FILTERED_F
 
 rule all:
     input:
-        samps_fwd,
-        samps_rev
+        '{error_dir}/errors.RData'.format(error_dir=ERROR_MODEL_DIR)
     run:
         print("FINISHED SUCCESSFULLY.")
 
@@ -43,7 +42,8 @@ rule filter_and_trim:
 
 rule learn_errors:
     input:
-        '{dir}/{fr}/{{sample}}.{{pair}}.fastq.gz'.format(dir=FILTERED_FASTQ_DIR, fr=FWD_REV[0], pair=PAIRS[0])
+        samps_fwd,
+        samps_rev
     output:
         '{error_dir}/errors.RData'.format(error_dir=ERROR_MODEL_DIR)
     shell:
