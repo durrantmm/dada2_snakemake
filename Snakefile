@@ -18,18 +18,13 @@ SAMPLES = list(set(glob_wildcards('{fastq_dir}/{{sample}}.{{pair}}.fastq.gz'.for
 PAIRS = ['R1', 'R2']
 FWD_REV = ['FWD','REV']
 
-
-def iter_samples(samples):
-    for batch in SAMPLES:
-        for samp in SAMPLES[batch]:
-            yield (batch, samp)
-
-
-print(len(SAMPLES))
-sys.exit()
 samps_fwd = expand('{dir}/{fr}/{{sample}}.{pair}.fastq.gz'.format(dir=FILTERED_FASTQ_DIR, fr=FWD_REV[0], pair=PAIRS[0]), sample=SAMPLES)
 samps_rev = expand('{dir}/{fr}/{{sample}}.{pair}.fastq.gz'.format(dir=FILTERED_FASTQ_DIR, fr=FWD_REV[1], pair=PAIRS[1]), sample=SAMPLES)
 
+print(len(samps_fwd))
+print(len(samps_rev))
+
+sys.exit()
 
 rule all:
     input:
