@@ -4,7 +4,7 @@ import os, sys
 from os.path import basename, join
 from glob import glob
 
-WD = config['working_dir']
+WD = config['wd']
 
 FASTQ_DIR = join(WD, config['orig_fastqs'])
 
@@ -31,7 +31,6 @@ samps_rev = expand('{dir}/{fr}/{{sample}}.{pair}.fastq.gz'.format(dir=FILTERED_F
 
 rule all:
     input:
-        #expand('{error_dir}/{batch}/error_model.R', error_dir=ERROR_MODEL_DIR, batch=BATCHES)
         samps_fwd,
         samps_rev
     run:

@@ -1,4 +1,4 @@
-working_dir: /Users/mdurrant/OneDrive/Stanford/SnyderLab/sophia/output_dada2
+wd: /Users/mdurrant/OneDrive/Stanford/SnyderLab/sophia/wd/RUN1
 
 orig_fastqs: 0.fastq
 filtered_fastqs: 1.filtered_fastq
