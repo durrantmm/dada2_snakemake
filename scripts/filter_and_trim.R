@@ -21,7 +21,3 @@ filterAndTrim(fwd=FWD.fastq, filt=FWD.filtered_path,
               rm.phix=TRUE,
               compress=TRUE, 
               verbose=TRUE)
-
-?mvrnorm
-Sigma <- matrix(c(10,3,3,2),2,2)
-mvrnorm(n = 1, rep(0, 2), Sigma,)
