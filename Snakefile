@@ -21,10 +21,6 @@ FWD_REV = ['FWD','REV']
 samps_fwd = expand('{dir}/{fr}/{{sample}}.{pair}.fastq.gz'.format(dir=FILTERED_FASTQ_DIR, fr=FWD_REV[0], pair=PAIRS[0]), sample=SAMPLES)
 samps_rev = expand('{dir}/{fr}/{{sample}}.{pair}.fastq.gz'.format(dir=FILTERED_FASTQ_DIR, fr=FWD_REV[1], pair=PAIRS[1]), sample=SAMPLES)
 
-print(len(samps_fwd))
-print(len(samps_rev))
-
-sys.exit()
 
 rule all:
     input:
