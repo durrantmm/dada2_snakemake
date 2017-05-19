@@ -14,7 +14,7 @@ SEQTABS_DIR = join(WD, config['seqtables_dir'])
 MERGED_SEQTAB_DIR = join(WD, config['merged_seqtab_dir'])
 TAXONOMY_DIR = join(WD, config['taxonomy_dir'])
 
-SAMPLES = glob_wildcards('{fastq_dir}/{{sample}}.{{pair}}.fastq.gz'.format(fastq_dir=FASTQ_DIR)).sample
+SAMPLES = list(set(glob_wildcards('{fastq_dir}/{{sample}}.{{pair}}.fastq.gz'.format(fastq_dir=FASTQ_DIR)).sample))
 PAIRS = ['R1', 'R2']
 FWD_REV = ['FWD','REV']
 
