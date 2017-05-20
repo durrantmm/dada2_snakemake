@@ -19,7 +19,7 @@ errF <- learnErrors(FWD.fastqs, nread=2e6, multithread=TRUE)
 
 # Learn reverse error rates
 print("Learning reverse error rates from 2 million reads...")
-errR <- learnErrors(filtRs, nread=2e6, multithread=TRUE)
+errR <- learnErrors(REV.fastqs, nread=2e6, multithread=TRUE)
 
 print("Saving error rates...")
 save(errF, errR, file=error_rdata)

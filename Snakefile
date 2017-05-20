@@ -48,3 +48,14 @@ rule learn_errors:
         '{error_dir}/errors.RData'.format(error_dir=ERROR_MODEL_DIR)
     shell:
         'Rscript scripts/error_model.R {output} {input}'
+
+
+rule sample_inference:
+    input:
+        error = '{error_dir}/errors.RData'.format(error_dir=ERROR_MODEL_DIR),
+        r1 = "{fq_dir}/{fwdrev}/{{sample}}.{pair}.fastq.gz".format(fq_dir=FILTERED_FASTQ_DIR, fwdrev=FWD_REV[0], pair=PAIRS[0]),
+        r2 = "{fq_dir}/{fwdrev}/{{sample}}.{pair}.fastq.gz".format(fq_dir=FILTERED_FASTQ_DIR, fwdrev=FWD_REV[1], pair=PAIRS[1])
+    output:
+        '{error_dir}/errors.RData'.format(error_dir=ERROR_MODEL_DIR)
+    shell:
+        'Rscript scripts/error_model.R {output} {input}'
