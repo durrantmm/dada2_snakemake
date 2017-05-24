@@ -24,7 +24,7 @@ samps_rev = expand('{dir}/{fr}/{{sample}}.{pair}.fastq.gz'.format(dir=FILTERED_F
 
 rule all:
     input:
-        '{error_dir}/errors.RData'.format(error_dir=ERROR_MODEL_DIR)
+        expand('{seqtab_dir}/{{sample}}.seqtab'.format(seqtab_dir=SEQTABS_DIR), sample=SAMPLES)
     run:
         print("FINISHED SUCCESSFULLY.")
 
@@ -50,12 +50,22 @@ rule learn_errors:
         'Rscript scripts/error_model.R {output} {input}'
 
 
-#rule sample_inference:
-#    input:
-#        error = '{error_dir}/errors.RData'.format(error_dir=ERROR_MODEL_DIR),
-#        r1 = "{fq_dir}/{fwdrev}/{{sample}}.{pair}.fastq.gz".format(fq_dir=FILTERED_FASTQ_DIR, fwdrev=FWD_REV[0], pair=PAIRS[0]),
-#        r2 = "{fq_dir}/{fwdrev}/{{sample}}.{pair}.fastq.gz".format(fq_dir=FILTERED_FASTQ_DIR, fwdrev=FWD_REV[1], pair=PAIRS[1])
-#    output:
-#        '{error_dir}/errors.RData'.format(error_dir=ERROR_MODEL_DIR)
-#    shell:
-#        'Rscript scripts/error_model.R {output} {input}'
+rule sample_inference:
+    input:
+        error = '{error_dir}/errors.RData'.format(error_dir=ERROR_MODEL_DIR),
+        r1 = "{fq_dir}/{fwdrev}/{{sample}}.{pair}.fastq.gz".format(fq_dir=FILTERED_FASTQ_DIR, fwdrev=FWD_REV[0], pair=PAIRS[0]),
+        r2 = "{fq_dir}/{fwdrev}/{{sample}}.{pair}.fastq.gz".format(fq_dir=FILTERED_FASTQ_DIR, fwdrev=FWD_REV[1], pair=PAIRS[1])
+    output:
+        '{seqtab_dir}/{{sample}}.seqtab'.format(seqtab_dir=SEQTABS_DIR)
+    shell:
+        'Rscript scripts/sample_inference.R {input.error} {input.r1} {input.r2} {output}'
+
+
+rule merge_seqtabs:
+    input:
+        expand('{seqtab_dir}/{{sample}}.seqtab'.format(seqtab_dir=SEQTABS_DIR), sample=SAMPLES)
+    output:
+        '{merged_seqtab_dir}/seqtab.rds'.format(merged_seqtab_dir=MERGED_SEQTAB_DIR),
+        '{merged_seqtab_dir}/seqtab.tsv'.format(merged_seqtab_dir=MERGED_SEQTAB_DIR)
+    shell:
+        'Rscript scripts/merge_seqtabs.R {output} {input}'
