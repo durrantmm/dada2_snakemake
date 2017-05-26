@@ -6,7 +6,7 @@ error_model_dir: 2.error_models
 seqtables_dir: 3.sequence_tables
 taxonomy_dir: 4.assigned_taxonomies
 merged_seqtab_dir: 4.merged_sequence_table
-merged_seqtab_dir: 5.merged_taxonomies
+merged_taxonomies_dir: 5.merged_taxonomies
 
 
 rdp_train_set: data/rdp_train_set_14.fa.gz
