@@ -25,7 +25,9 @@ samps_rev = expand('{dir}/{fr}/{{sample}}.{pair}.fastq.gz'.format(dir=FILTERED_F
 rule all:
     input:
         '{merged_seqtab_dir}/seqtab.rds'.format(merged_seqtab_dir=MERGED_SEQTAB_DIR),
-        '{merged_seqtab_dir}/seqtab.tsv'.format(merged_seqtab_dir=MERGED_SEQTAB_DIR)
+        '{merged_seqtab_dir}/seqtab.tsv'.format(merged_seqtab_dir=MERGED_SEQTAB_DIR),
+        expand('{taxonomy_dir}/{{sample}}.silva.rds'.format(taxonomy_dir=TAXONOMY_DIR), sample=SAMPLES),
+        expand('{taxonomy_dir}/{{sample}}.rdp.rds'.format(taxonomy_dir=TAXONOMY_DIR), sample=SAMPLES)
     run:
         print("FINISHED SUCCESSFULLY.")
 
@@ -70,3 +72,25 @@ rule merge_seqtabs:
         '{merged_seqtab_dir}/seqtab.tsv'.format(merged_seqtab_dir=MERGED_SEQTAB_DIR)
     shell:
         'Rscript scripts/merge_seqtabs.R {output} {input}'
+
+
+rule assign_taxonomy_rdp:
+    input:
+        '{seqtab_dir}/{{sample}}.seqtab'.format(seqtab_dir=SEQTABS_DIR),
+        config['rdp_train_set'],
+        config['rdp_species_train_set']
+    output:
+        '{taxonomy_dir}/{{sample}}.rdp.rds'.format(taxonomy_dir=TAXONOMY_DIR)
+    shell:
+        'Rscript scripts/assign_taxonomies_rdp.R {input} {output}'
+
+
+rule assign_taxonomy_silva:
+    input:
+        '{seqtab_dir}/{{sample}}.seqtab'.format(seqtab_dir=SEQTABS_DIR),
+        config['silva_train_set'],
+        config['silva_species_train_set']
+    output:
+        '{taxonomy_dir}/{{sample}}.silva.rds'.format(taxonomy_dir=TAXONOMY_DIR)
+    shell:
+        'Rscript scripts/assign_taxonomies_silva.R {input} {output}
