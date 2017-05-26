@@ -16,7 +16,7 @@
     "learn_errors" :
     {
         "mem" : "25G",
-        "time" : "72:00:00"
+        "time" : "168:00:00"
     },
 
      "sample_inference" :

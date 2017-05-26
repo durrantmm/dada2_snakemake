@@ -24,7 +24,8 @@ samps_rev = expand('{dir}/{fr}/{{sample}}.{pair}.fastq.gz'.format(dir=FILTERED_F
 
 rule all:
     input:
-        expand('{seqtab_dir}/{{sample}}.seqtab'.format(seqtab_dir=SEQTABS_DIR), sample=SAMPLES)
+        '{merged_seqtab_dir}/seqtab.rds'.format(merged_seqtab_dir=MERGED_SEQTAB_DIR),
+        '{merged_seqtab_dir}/seqtab.tsv'.format(merged_seqtab_dir=MERGED_SEQTAB_DIR)
     run:
         print("FINISHED SUCCESSFULLY.")
 
