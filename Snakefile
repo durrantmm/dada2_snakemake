@@ -93,4 +93,4 @@ rule assign_taxonomy_silva:
     output:
         '{taxonomy_dir}/{{sample}}.silva.rds'.format(taxonomy_dir=TAXONOMY_DIR)
     shell:
-        'Rscript scripts/assign_taxonomies_silva.R {input} {output}
+        'Rscript scripts/assign_taxonomies_silva.R {input} {output}'
