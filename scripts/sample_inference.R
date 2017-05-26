@@ -43,3 +43,5 @@ rm(derepF); rm(derepR)
 seqtab <- makeSequenceTable(mergers)
 print(paste("Saving results to", seqtab_out))
 saveRDS(seqtab, seqtab_out) 
+
+?removeBimeraDenovo
