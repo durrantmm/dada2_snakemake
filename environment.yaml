@@ -5,3 +5,4 @@ dependencies:
   - python=3.5.3
   - snakemake=3.11.2
   - bioconductor-dada2
+  - r-readr
