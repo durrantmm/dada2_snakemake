@@ -10,7 +10,7 @@ seqtab <- readRDS(args[1], refhook = NULL)
 seqtab_out_rds <- args[2]
 seqtab_out_tsv <- args[3]
 
-print("Assigning initial taxonomies using rdp training set...")
+print("Removing bimeric sequences...")
 seqtab <- removeBimeraDenovo(seqtab, method="consensus", multithread=TRUE)
 
 print("Writing to file...")
