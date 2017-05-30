@@ -34,4 +34,6 @@ print("Dimensions of merged sequence table:")
 
 print(table(nchar(getSequences(merged_seqtab))))
 saveRDS(merged_seqtab, seqtable_out_rds) # CHANGE ME to where you want sequence table saved
-write_tsv(data.frame(merged_seqtab), seqtable_out_tsv) # CHANGE ME to where you want sequence table saved
+merged_seqtab_tsv <- cbind(data.frame(ID=rownames(data.frame(merged_seqtab))), 
+                           data.frame(merged_seqtab)) 
+write_tsv(merged_seqtab_tsv, seqtable_out_tsv) # CHANGE ME to where you want sequence table saved
