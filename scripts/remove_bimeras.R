@@ -11,7 +11,7 @@ seqtab_out_rds <- args[2]
 seqtab_out_tsv <- args[3]
 
 print("Removing bimeric sequences...")
-seqtab <- removeBimeraDenovo(seqtab, method="consensus", multithread=TRUE)
+seqtab <- removeBimeraDenovo(seqtab, method="consensus", multithread=TRUE, verbose=TRUE)
 
 print("Writing to file...")
 saveRDS(seqtab, seqtab_out_rds) 
