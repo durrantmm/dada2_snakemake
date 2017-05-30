@@ -11,11 +11,16 @@ silva_train_set <- args[2]
 silva_species_train_set <- args[3]
 silva_taxa_out_rds <- args[4]
 
-print("Assigning initial taxonomies using silva training set...")
-silva.taxa <- assignTaxonomy(seqtab, silva_train_set, verbose=TRUE)
-print("Assigning species using silva training set...")
-silva.taxa <- addSpecies(silva.taxa, silva_species_train_set, verbose=TRUE)
+seqtab <- removeBimeraDenovo(seqtab, method="consensus", multithread=TRUE)
 
+print("Assigning initial taxonomies using silva training set...")
+silva.taxa <- assignTaxonomy(seqtab, silva_train_set, allowMultiple=TRUE, 
+                             verbose=TRUE, multithread=TRUE)
+
+print("Assigning species using silva training set...")
+silva.taxa <- addSpecies(silva.taxa, silva_species_train_set, allowMultiple=TRUE, 
+                         verbose=TRUE, multithread=TRUE)
+?addSpecies
 silva.taxa.df <- data.frame(silva.taxa)
 silva.taxa.df$Sequence <- rownames(silva.taxa)
 

@@ -11,11 +11,15 @@ rdp_train_set <- args[2]
 rdp_species_train_set <- args[3]
 rdp_taxa_out_rds <- args[4]
 
-print("Assigning initial taxonomies using rdp training set...")
+seqtab <- removeBimeraDenovo(seqtab, method="consensus", multithread=TRUE)
 
-rdp.taxa <- assignTaxonomy(seqtab, rdp_train_set, verbose=TRUE)
+print("Assigning initial taxonomies using rdp training set...")
+rdp.taxa <- assignTaxonomy(seqtab, rdp_train_set, allowMultiple=TRUE, 
+                           verbose=TRUE, multithread=TRUE)
+
 print("Assigning species using rdp training set...")
-rdp.taxa <- addSpecies(rdp.taxa, rdp_species_train_set, verbose=TRUE)
+rdp.taxa <- addSpecies(rdp.taxa, rdp_species_train_set, allowMultiple=TRUE, 
+                       verbose=TRUE, multithread=TRUE)
 
 rdp.taxa.df <- data.frame(rdp.taxa)
 rdp.taxa.df$Sequence <- rownames(rdp.taxa)
