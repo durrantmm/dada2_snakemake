@@ -12,7 +12,7 @@ silva_species_train_set <- args[3]
 silva_taxa_out_rds <- args[4]
 
 print("Assigning initial taxonomies using silva training set...")
-silva.taxa <- assignTaxonomy(seqtab, silva_train_set, allowMultiple=TRUE, 
+silva.taxa <- assignTaxonomy(seqtab, silva_train_set,
                              verbose=TRUE, multithread=TRUE)
 
 print("Assigning species using silva training set...")
