@@ -12,9 +12,6 @@ rdp_species_train_set <- args[3]
 rdp_taxa_out_rds <- args[4]
 
 print("Assigning initial taxonomies using rdp training set...")
-seqtab <- removeBimeraDenovo(seqtab, method="consensus", multithread=TRUE)
-
-print("Assigning initial taxonomies using rdp training set...")
 rdp.taxa <- assignTaxonomy(seqtab, rdp_train_set, allowMultiple=TRUE, 
                            verbose=TRUE, multithread=TRUE)
 
