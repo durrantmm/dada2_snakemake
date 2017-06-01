@@ -17,7 +17,7 @@ rdp.taxa <- assignTaxonomy(seqtab, rdp_train_set,
 
 print("Assigning species using rdp training set...")
 rdp.taxa <- addSpecies(rdp.taxa, rdp_species_train_set, allowMultiple=TRUE, 
-                       verbose=TRUE, multithread=TRUE)
+                       verbose=TRUE)
 
 rdp.taxa.df <- data.frame(rdp.taxa)
 rdp.taxa.df$Sequence <- rownames(rdp.taxa)

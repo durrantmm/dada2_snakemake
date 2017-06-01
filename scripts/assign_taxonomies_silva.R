@@ -17,7 +17,7 @@ silva.taxa <- assignTaxonomy(seqtab, silva_train_set,
 
 print("Assigning species using silva training set...")
 silva.taxa <- addSpecies(silva.taxa, silva_species_train_set, allowMultiple=TRUE, 
-                         verbose=TRUE, multithread=TRUE)
+                         verbose=TRUE)
 
 silva.taxa.df <- data.frame(silva.taxa)
 silva.taxa.df$Sequence <- rownames(silva.taxa)
